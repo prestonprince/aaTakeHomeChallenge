@@ -5,13 +5,13 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from .config import Config
 from .models import db
-from .api import coffee_routes
+from .api.coffee_routes import coffee_routes
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 app.config.from_object(Config)
 
 
-app.register_blueprint(coffee_routes, url_prefic='/api/coffee')
+app.register_blueprint(coffee_routes, url_prefix='/api/coffee')
 
 
 db.init_app(app)
