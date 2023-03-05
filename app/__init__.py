@@ -6,11 +6,13 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from .config import Config
 from .models import db
 from .api.coffee_routes import coffee_routes
+from .seeds import seed_commands
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
+app.cli.add_command(seed_commands)
+
+
 app.config.from_object(Config)
-
-
 app.register_blueprint(coffee_routes, url_prefix='/api/coffee')
 
 
