@@ -11,3 +11,26 @@ class Post(db.Model):
     text = db.Column(db.String(255), nullable=False)
     rating = db.Column(db.Numeric(precision=2, scale=1), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
+
+    coffee = db.relationship("Coffee", back_populate='posts')
+    
+    def to_dict_base(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "coffee_id": self.coffee_id,
+            "text": self.text,
+            "rating": self.rating,
+            "created_at": self.created_at,
+        }
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "coffee_id": self.coffee_id,
+            "text": self.text,
+            "rating": self.rating,
+            "created_at": self.created_at,
+            "coffee": self.coffee.to_dict()
+        }
