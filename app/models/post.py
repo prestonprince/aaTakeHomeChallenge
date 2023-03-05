@@ -1,5 +1,5 @@
 from .db import db
-from sqlalchemy.sql import func
+from datetime import datetime
 
 
 class Post(db.Model):
@@ -9,8 +9,8 @@ class Post(db.Model):
     title = db.Column(db.String(50), nullable=False)
     coffee_id = db.Column(db.Integer, db.ForeignKey('coffee.id'), nullable=False)
     text = db.Column(db.String(255), nullable=False)
-    rating = db.Column(db.Numeric(precision=2, scale=1), nullable=False)
-    created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    rating = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now)
 
     coffee = db.relationship("Coffee", back_populates='posts')
     

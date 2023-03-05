@@ -8,7 +8,7 @@ class Coffee(db.Model):
     name = db.Column(db.String(50), nullable=False)
     year = db.Column(db.Integer, nullable=False)
     caffeine_content = db.Column(db.Integer, nullable=False)
-    caffeine_percentage = db.Column(db.Numeric(precision=4, scale=2))
+    caffeine_percentage = db.Column(db.Integer)
 
     posts = db.relationship('Post', back_populates='coffee')
 
