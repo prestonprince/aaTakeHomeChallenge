@@ -20,5 +20,25 @@ def all_coffee():
     order = request.args['order']
     all_coffees = Coffee.query.order_by(Coffee.name).all() if order == 'asc' else Coffee.query.order_by(desc(Coffee.name)).all()
 
-    coffees = [coffee.to_dict() for coffee in all_coffees]
-    return {'coffee': coffees}
+    coffees = [ coffee.to_dict() for coffee in all_coffees ]
+    return { 'coffee': coffees }
+
+
+@coffee_routes.route('/<int:id>')
+def get_coffee(id):
+    """
+    Query for and return single coffee by id
+    """
+    #todo 
+    # error handling
+
+    coffee = Coffee.query.get(id).to_dict()
+
+    return { "coffee": coffee }
+
+
+@coffee_routes.route('/create/', methods=['POST'])
+def create_coffee():
+    """
+    Creates new coffee
+    """
