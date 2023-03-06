@@ -21,4 +21,4 @@ def all_coffee():
     all_coffees = Coffee.query.order_by(Coffee.name).all() if order == 'asc' else Coffee.query.order_by(desc(Coffee.name)).all()
 
     coffees = [coffee.to_dict() for coffee in all_coffees]
-    return {'coffee': normalize(coffees)}
+    return {'coffee': coffees}
