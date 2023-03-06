@@ -58,3 +58,26 @@ def create_coffee():
         db.session.commit()
         return new_coffee.to_dict(), 201
     return{'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@coffee_routes.route('/delete/<int:id>', methods=['DELETE'])
+def delete_coffee(id):
+    """
+    Query for and delete coffee by id
+    returns success message if deleted
+    returns error message if unsuccessful
+    """
+    coffee = Coffee.query.get(id)
+
+    if not coffee:
+        return {'errors': 'Coffee not found'}
+    
+    coffee_posts = coffee.posts
+    if len(coffee_posts) > 0:
+        for post in coffee_posts:
+            db.session.delete(report)
+            db.session.commit()
+
+    db.session.delete(coffee)
+    db.session.commit()
+    return {'message': 'coffee successfully deleted'}
