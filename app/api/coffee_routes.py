@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from app.models import db, Coffee, Post
 from app.forms import CreateCoffee
-from app.utils import validation_errors_to_error_messages, normalize
+from app.utils import validation_errors_to_error_messages
 from sqlalchemy import desc
 
 
