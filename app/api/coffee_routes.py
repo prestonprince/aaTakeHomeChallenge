@@ -70,7 +70,7 @@ def delete_coffee(id):
     coffee = Coffee.query.get(id)
 
     if not coffee:
-        return {'errors': 'Coffee not found'}
+        return {'error': 'Coffee not found'}
     
     coffee_posts = coffee.posts
     if len(coffee_posts) > 0:
